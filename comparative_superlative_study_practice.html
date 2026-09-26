@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Comparative & Superlative Study Practice</title>
+<style>
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    font-family:Arial,Helvetica,sans-serif;
+    background:linear-gradient(135deg,#ffe4f1,#fff0f7,#fce7f3);
+    color:#4a1835;
+    padding:24px;
+  }
+  .container{max-width:900px;margin:auto}
+  .header{
+    background:linear-gradient(135deg,#ec4899,#f472b6);
+    color:white;padding:28px;border-radius:22px;
+    text-align:center;box-shadow:0 8px 22px rgba(236,72,153,.22);
+    margin-bottom:22px;
+  }
+  .header h1{margin:0 0 8px;font-size:32px}
+  .header p{margin:0;font-size:16px}
+  .task{
+    background:white;border:2px solid #f9a8d4;border-radius:18px;
+    padding:22px;margin-bottom:20px;
+    box-shadow:0 5px 16px rgba(190,24,93,.08)
+  }
+  .task h2{margin:0 0 6px;color:#be185d}
+  .task-note{color:#7c3f60;margin:0 0 18px}
+  .question{
+    padding:15px 14px;margin:12px 0;border-radius:13px;
+    background:#fff7fb;border:1px solid #fbcfe8;
+  }
+  .question.correct{border-color:#22c55e;background:#f0fdf4}
+  .question.incorrect{border-color:#ef4444;background:#fef2f2}
+  .qtext{font-weight:600;margin-bottom:10px;line-height:1.5}
+  input,select{
+    font-size:16px;padding:10px 12px;border:2px solid #f9a8d4;
+    border-radius:10px;background:white;color:#4a1835;
+    max-width:100%;
+  }
+  input:focus,select:focus{outline:3px solid #fce7f3;border-color:#ec4899}
+  .answer{
+    display:none;margin-top:9px;font-size:14px;font-weight:700;
+  }
+  .question.checked .answer{display:block}
+  .correct-text{color:#15803d}
+  .wrong-text{color:#dc2626}
+  .submit{
+    width:100%;border:0;border-radius:15px;padding:16px;
+    background:#db2777;color:white;font-size:18px;font-weight:800;
+    cursor:pointer;box-shadow:0 6px 14px rgba(219,39,119,.25)
+  }
+  .submit:hover{background:#be185d}
+  #result{
+    display:none;margin-top:20px;background:#fff;border:3px solid #f472b6;
+    border-radius:18px;padding:22px;text-align:center
+  }
+  #score{font-size:30px;color:#be185d;font-weight:900}
+  .small{font-size:13px;color:#7c3f60;margin-top:6px}
+  .word{width:180px}
+  @media(max-width:600px){
+    body{padding:12px}.header h1{font-size:25px}.task{padding:16px}
+    .word{width:150px}
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1>🌸 Comparative & Superlative Adjectives 🌸</h1>
+    <p>Study Practice — Complete all 30 questions, then check your score.</p>
+  </div>
+
+  <form id="quiz">
+
+    <section class="task">
+      <h2>Task 1: Comparative Adjectives</h2>
+      <p class="task-note">Complete each sentence with the comparative form of the adjective in brackets.</p>
+      <div id="task1"></div>
+    </section>
+
+    <section class="task">
+      <h2>Task 2: Superlative Adjectives</h2>
+      <p class="task-note">Complete each sentence with the superlative form of the adjective in brackets.</p>
+      <div id="task2"></div>
+    </section>
+
+    <section class="task">
+      <h2>Task 3: Comparative or Superlative?</h2>
+      <p class="task-note">Choose the correct form for each sentence.</p>
+      <div id="task3"></div>
+    </section>
+
+    <button class="submit" type="submit">💗 Check My Answers</button>
+  </form>
+
+  <div id="result">
+    <div id="score"></div>
+    <div id="message"></div>
+    <div class="small">Correct answers are shown below each question.</div>
+  </div>
+</div>
+
+<script>
+const task1 = [
+  ["My car is ___ than my sister's car. (fast)", "faster"],
+  ["Today is ___ than yesterday. (hot)", "hotter"],
+  ["This book is ___ than that book. (interesting)", "more interesting"],
+  ["A bicycle is ___ than a motorcycle. (cheap)", "cheaper"],
+  ["My new phone is ___ than my old phone. (good)", "better"],
+  ["English is ___ for me than mathematics. (easy)", "easier"],
+  ["This bag is ___ than that one. (heavy)", "heavier"],
+  ["My brother is ___ than me. (tall)", "taller"],
+  ["This exercise is ___ than the last one. (difficult)", "more difficult"],
+  ["A train is usually ___ than a bus. (fast)", "faster"]
+];
+
+const task2 = [
+  ["Mount Everest is ___ mountain in the world. (high)", "the highest"],
+  ["This is ___ movie I have ever seen. (good)", "the best"],
+  ["She is ___ student in the class. (hard-working)", "the most hard-working"],
+  ["Sunday is ___ day of the week for me. (relaxing)", "the most relaxing"],
+  ["That was ___ test in the book. (easy)", "the easiest"],
+  ["This is ___ restaurant in our town. (expensive)", "the most expensive"],
+  ["He is ___ player on the team. (young)", "the youngest"],
+  ["February is ___ month of the year. (short)", "the shortest"],
+  ["This is ___ story in the book. (funny)", "the funniest"],
+  ["She bought ___ dress in the shop. (beautiful)", "the most beautiful"]
+];
+
+const task3 = [
+  ["My house is ___ than yours. (big)", "bigger"],
+  ["This is ___ restaurant in the city. (popular)", "the most popular"],
+  ["Today is ___ than Monday. (busy)", "busier"],
+  ["He is ___ student in the class. (tall)", "the tallest"],
+  ["A laptop is ___ than a desktop computer for travel. (convenient)", "more convenient"],
+  ["This is ___ question in the test. (difficult)", "the most difficult"],
+  ["My sister is ___ than me. (young)", "younger"],
+  ["That was ___ day of my holiday. (exciting)", "the most exciting"],
+  ["A car is usually ___ than a bicycle. (expensive)", "more expensive"],
+  ["Who is ___ person in your family? (old)", "the oldest"]
+];
+
+function makeInput(item, index, taskNo){
+  const [sentence, answer] = item;
+  const blank = `<input class="word" type="text" autocomplete="off" aria-label="Answer ${taskNo}-${index+1}">`;
+  const text = sentence.replace("___", blank);
+  return `<div class="question" data-answer="${answer.toLowerCase()}">
+    <div class="qtext">${index+1}. ${text}</div>
+    <div class="answer"></div>
+  </div>`;
+}
+
+function makeSelect(item,index){
+  const [sentence,answer]=item;
+  const options = answer.includes("the ") ?
+    [answer,""+answer.replace(/^the /,""), answer.includes("most") ? answer.replace("most","more") : "the "+answer.replace("the ","")] :
+    [answer, "the "+answer, answer.includes("er") ? answer.replace(/er$/,"est") : "more "+answer];
+  const unique=[...new Set(options)];
+  return `<div class="question" data-answer="${answer.toLowerCase()}">
+    <div class="qtext">${index+1}. ${sentence.replace("___",`<select aria-label="Answer 3-${index+1}"><option value="">Choose...</option>${unique.map(o=>`<option value="${o.toLowerCase()}">${o}</option>`).join("")}</select>`)}</div>
+    <div class="answer"></div>
+  </div>`;
+}
+
+document.getElementById("task1").innerHTML=task1.map((x,i)=>makeInput(x,i,1)).join("");
+document.getElementById("task2").innerHTML=task2.map((x,i)=>makeInput(x,i,2)).join("");
+document.getElementById("task3").innerHTML=task3.map((x,i)=>makeSelect(x,i)).join("");
+
+function normalize(s){
+  return s.trim().toLowerCase().replace(/\s+/g," ");
+}
+
+document.getElementById("quiz").addEventListener("submit",function(e){
+  e.preventDefault();
+  let score=0,total=30;
+
+  document.querySelectorAll(".question").forEach(q=>{
+    const expected=q.dataset.answer;
+    const input=q.querySelector("input,select");
+    const given=normalize(input.value);
+    const ok=given===expected;
+    q.classList.remove("correct","incorrect");
+    q.classList.add(ok?"correct":"incorrect");
+    q.classList.add("checked");
+    const ans=q.querySelector(".answer");
+    ans.innerHTML=ok
+      ? `<span class="correct-text">✓ Correct!</span>`
+      : `<span class="wrong-text">✗ Your answer: ${given||"(no answer)"}</span><br><span class="correct-text">Correct answer: <strong>${expected}</strong></span>`;
+    if(ok)score++;
+  });
+
+  const pct=Math.round(score/total*100);
+  document.getElementById("score").textContent=`🌸 Score: ${score} / ${total} (${pct}%)`;
+  document.getElementById("message").textContent=
+    pct===100?"Perfect! Excellent work! 🎉":
+    pct>=80?"Great job! Keep practicing! 💗":
+    pct>=60?"Good effort! Review the answers and try again! 🌷":
+    "Keep practicing! You can do it! 🌸";
+  document.getElementById("result").style.display="block";
+  document.getElementById("result").scrollIntoView({behavior:"smooth",block:"center"});
+});
+</script>
+</body>
+</html>
